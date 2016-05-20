@@ -15,8 +15,8 @@ datatype valu = Const of int
 	      | Constructor of string * valu
 
 fun g f1 f2 p =
-    let 
-	val r = g f1 f2 
+    let
+	val r = g f1 f2
     in
 	case p of
 	    Wildcard          => f1 ()
@@ -50,13 +50,13 @@ fun longest_string2(xs) =
 fun longest_string_helper f xs =
   List.foldl (fn (x,y) => if f(String.size(x),String.size(y))then x else y) "" xs
 
-val longest_string3 = longest_string_helper (fn(x,y) => x > y) 
+val longest_string3 = longest_string_helper (fn(x,y) => x > y)
 
-val longest_string4 = longest_string_helper (fn(x,y) => x >= y) 
+val longest_string4 = longest_string_helper (fn(x,y) => x >= y)
 
-(* 5 *)
-					   
+(* 5 *) (* testing to  see if git worked)
+
 (*fun longest_capitalized xs =
   List.foldl ((fn (x,y) => if String.size x > String.size y andalso Char.isUpper(String.sub(x,0)) then x else y)) "" xs*)
 
-val longest_capitalized = longest_string3 o only_capitals 
+val longest_capitalized = longest_string3 o only_capitals
