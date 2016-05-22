@@ -7,5 +7,9 @@
 
 (define (sequence low high stride)
   (if (> low high)
-      high
-      (cons low (sequence (+ low stride) high stride)))) 
+      null
+      (cons low (sequence (+ low stride) high stride))))
+
+(define (string-append-map xs suffix)
+  (map (lambda (listx) (append listx (list suffix))) xs))
+
