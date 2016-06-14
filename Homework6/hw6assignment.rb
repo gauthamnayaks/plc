@@ -28,7 +28,7 @@ class MyBoard < Board
   end
 
   def cheat_piece
-    if !game_over? and @game.is_running?
+    if !game_over? and @game.is_running? and @score >= 100
       @cheated = true
     end
   end
@@ -38,7 +38,7 @@ class MyBoard < Board
       @current_block = MyPiece.cheat_piece(self)
       @current_pos = nil
       @cheated = false
-      if @score >= 0
+      if @score >= 100
         @score -= 100
       else
         @score = 0
