@@ -8,12 +8,12 @@ class MyPiece < Piece
   All_Pieces = Piece::All_Pieces.concat( # Enhancement 2
                 [[[[0, 0], [-1, 0], [1, 0], [2, 0], [-2,0]], # long 5 (only needs two)
                 [[0, 0], [0, -1], [0, 1], [0, 2], [0, -2]]],
-                rotations([[0, 0], [0, 1], [1, 0]]), # 3 block
+                rotations([[0, 0], [0, 1], [1, 0],[0, 0]]), # 3 block
                 rotations([[0, 0], [0, 1], [-1, 0], [1, 0], [-1, 1]])])
   # your enhancements here
   def self.cheat_piece (board)
     #MyPiece.new(All_Pieces[10], board)
-    MyPiece.new([[[0,0]]], board)
+    MyPiece.new([[[0,0],[0,0],[0,0],[0,0]]], board)
   end
 end
 
@@ -38,7 +38,11 @@ class MyBoard < Board
       @current_block = MyPiece.cheat_piece(self)
       @current_pos = nil
       @cheated = false
-      @score -= 100
+      if @score >= 0
+        @score -= 100
+      else
+        @score = 0
+      end
     else
       @current_block = MyPiece.next_piece(self)
       @current_pos = nil
