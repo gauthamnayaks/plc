@@ -5,7 +5,15 @@
 
 class MyPiece < Piece
   # The constant All_My_Pieces should be declared here
-
+  All_Pieces = [#[[[0, 0], [1, 0], [0, 1], [1, 1]]],  # square (only needs one)
+               #rotations([[0, 0], [-1, 0], [1, 0], [0, -1]]), # T
+               #[[[0, 0], [-1, 0], [1, 0], [2, 0]], # long (only needs two)
+               #[[0, 0], [0, -1], [0, 1], [0, 2]]],
+               #rotations([[0, 0], [0, -1], [0, 1], [1, 1]]), # L
+               #rotations([[0, 0], [0, -1], [0, 1], [-1, 1]]), # inverted L
+               #rotations([[0, 0], [-1, 0], [0, -1], [1, -1]]), # S
+               #rotations([[0, 0], [1, 0], [0, -1], [-1, -1]]),
+                [[[0,0],[0,1]],[1,0],[0,0]]] # Z
   # your enhancements here
 
 end
@@ -19,5 +27,3 @@ class MyTetris < Tetris
   # your enhancements here
 
 end
-
-
