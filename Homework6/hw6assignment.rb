@@ -20,6 +20,7 @@ class MyPiece < Piece
     #MyPiece.new(All_Pieces[10], board)
     MyPiece.new([[[0,0],[0,0],[0,0],[0,0]]], board)
   end
+
 end
 
 class MyBoard < Board
@@ -75,11 +76,67 @@ end
 
 #### Attempt at Challenge ###
 
-class MyPieceChallenge < Piece
+class MyPieceChallenge < MyPiece
+  # The constant All_My_Pieces should be declared here
+  All_My_Pieces = Piece::All_Pieces.concat( # Enhancement 2
+                [[[[0, 0], [-1, 0], [1, 0], [2, 0], [-2,0]], # long 5 (only needs two)
+                [[0, 0], [0, -1], [0, 1], [0, 2], [0, -2]]],
+                rotations([[0, 0], [0, 1], [1, 0],[0, 0]]), # 3 block
+                rotations([[0, 0], [0, 1], [-1, 0], [1, 0], [-1, 1]])])
+  # your enhancements here
+
+  def self.next_piece (board)
+    MyPieceChallenge.new(All_My_Pieces.sample, board)
+  end
+
+  def self.cheat_piece (board)
+    #MyPieceChallenge.new(All_Pieces[10], board)
+    MyPieceChallenge.new([[[0,0],[0,0],[0,0],[0,0]]], board)
+  end
+
+  def drop_by_one
+    @color = All_Colors.sample
+    @moved = move(0, 1, 0)
+  end
+
 end
 
-class MyBoardChallenge < Board
+class MyBoardChallenge < MyBoard
+  # your enhancements here
+  def initialize (game)
+    @grid = Array.new(num_rows) {Array.new(num_columns)}
+    @current_block = MyPieceChallenge.next_piece(self)
+    @score = 0
+    @game = game
+    @delay = 500
+  end
+
+  # gets the next piece
+  def next_piece
+    if @cheated
+      @current_block = MyPieceChallenge.cheat_piece(self)
+      @current_pos = nil
+      @cheated = false
+      if @score >= 100
+        @score -= 100
+      else
+        @score = 0
+      end
+    else
+      @current_block = MyPieceChallenge.next_piece(self)
+      @current_pos = nil
+    end
+  end
+
 end
 
-class MyTetrisChallenge < Tetris
+class MyTetrisChallenge < MyTetris
+  # your enhancements here
+  def set_board
+    @canvas = TetrisCanvas.new
+    @board = MyBoardChallenge.new(self)
+    @canvas.place(@board.block_size * @board.num_rows + 3,
+                  @board.block_size * @board.num_columns + 6, 24, 80)
+    @board.draw
+  end
 end
