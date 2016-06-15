@@ -148,7 +148,7 @@ class Board
   # moves the current piece left if possible
   def move_left
     if !game_over? and @game.is_running?
-      @current_block.p(-1, 0, 0)
+      @current_block.move(-1, 0, 0)
     end
     draw
   end
