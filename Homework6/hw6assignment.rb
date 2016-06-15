@@ -75,11 +75,11 @@ end
 
 #### Attempt at Challenge ###
 
-#class MyPieceChallenge < Piece
-#end
+class MyPieceChallenge < Piece
+end
 
-#class MyBoardChallenge < Board
-#end
+class MyBoardChallenge < Board
+end
 
-#class MyTetrisChallenge < Tetris
-#end
+class MyTetrisChallenge < Tetris
+end
