@@ -5,12 +5,17 @@
 
 class MyPiece < Piece
   # The constant All_My_Pieces should be declared here
-  All_Pieces = Piece::All_Pieces.concat( # Enhancement 2
+  All_My_Pieces = Piece::All_Pieces.concat( # Enhancement 2
                 [[[[0, 0], [-1, 0], [1, 0], [2, 0], [-2,0]], # long 5 (only needs two)
                 [[0, 0], [0, -1], [0, 1], [0, 2], [0, -2]]],
                 rotations([[0, 0], [0, 1], [1, 0],[0, 0]]), # 3 block
                 rotations([[0, 0], [0, 1], [-1, 0], [1, 0], [-1, 1]])])
   # your enhancements here
+
+  def self.next_piece (board)
+    MyPiece.new(All_My_Pieces.sample, board)
+  end
+
   def self.cheat_piece (board)
     #MyPiece.new(All_Pieces[10], board)
     MyPiece.new([[[0,0],[0,0],[0,0],[0,0]]], board)
@@ -66,3 +71,15 @@ class MyTetris < Tetris
     @root.bind('c', lambda {@board.cheat_piece})
   end
 end
+
+
+#### Attempt at Challenge ###
+
+#class MyPieceChallenge < Piece
+#end
+
+#class MyBoardChallenge < Board
+#end
+
+#class MyTetrisChallenge < Tetris
+#end
